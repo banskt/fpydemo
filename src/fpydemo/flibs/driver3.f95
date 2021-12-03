@@ -44,7 +44,7 @@
 !
 !     **************
 
-      !imodule driver3
+      !module driver3
 
 !     This time-controlled driver shows that it is possible to terminate
 !     a run by elapsed CPU time, and yet be able to print all desired

@@ -1,0 +1,22 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module array_handler ! in 
+    interface  ! in :array_handler
+        subroutine array_division(x,a,nrow,ncol,y) ! in :array_handler:array_handler.f95
+            real(kind=8) dimension(nrow,ncol),intent(in) :: x
+            real(kind=8) intent(in) :: a
+            integer, optional,intent(in),check(shape(x,0)==nrow),depend(x) :: nrow=shape(x,0)
+            integer, optional,intent(in),check(shape(x,1)==ncol),depend(x) :: ncol=shape(x,1)
+            real(kind=8) dimension(nrow,ncol),intent(out),depend(nrow,ncol) :: y
+        end subroutine array_division
+        subroutine print_array2d(x,m,n) ! in :array_handler:array_handler.f95
+            real(kind=8) dimension(m,n),intent(in) :: x
+            integer, optional,intent(in),check(shape(x,0)==m),depend(x) :: m=shape(x,0)
+            integer, optional,intent(in),check(shape(x,1)==n),depend(x) :: n=shape(x,1)
+        end subroutine print_array2d
+    end interface 
+end python module array_handler
+
+! This file was auto-generated with f2py (version:1.21.4).
+! See http://cens.ioc.ee/projects/f2py2e/
