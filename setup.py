@@ -260,7 +260,7 @@ def setup_package():
     #cfg_str_keys  = 'name author author_email description copyright license'.split()
     #cfg_url_keys  = 'main_url download_url git_url docs_url source_code_url bug_tracker_url'.split()
     #cfg_list_keys = 'keywords setup_requires install_requires contributiors'.split()
-    ext1 = np_Extension(name = 'libfpydemo_fmath', sources = ['/home/saikat/Documents/work/fpydemo/src/fpydemo/flibs/fmathmod.f95', '/home/saikat/Documents/work/fpydemo/src/fpydemo/flibs/fmath.f95'])
+    #ext1 = np_Extension(name = 'libfpydemo_fmath', sources = ['/home/saikat/Documents/work/fpydemo/src/fpydemo/flibs/fmathmod.f95', '/home/saikat/Documents/work/fpydemo/src/fpydemo/flibs/fmath.f95'])
 
     metadata = dict(
         name             = cfg['name'],
@@ -282,7 +282,7 @@ def setup_package():
         packages         = setuptools.find_packages(where = "src"),
         package_dir      = {"": "src"},
         entry_points     = {'console_scripts': ['fpydemo = fpydemo.main:main']},
-        ext_modules      = [ext1], #ext_modules(),
+        ext_modules      = ext_modules(),
         cmdclass         = cmdclass,
         #setup_requires   = cfg_string_tolist('setup_requires', ','),
         python_requires  = req_py,

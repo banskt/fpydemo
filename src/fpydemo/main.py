@@ -30,12 +30,28 @@ def parse_args():
                         help = 'second number')
     parser.add_argument('--test',
                         dest = 'test',
-                        action='store_true',
-                        help='Perform unit tests')
+                        action = 'store_true',
+                        help = 'Perform unit tests')
+    parser.add_argument('--lbfgsb',
+                        dest = 'do_lbfgsb',
+                        action = 'store_true',
+                        help = 'Perform L-BFGS-B optimization of Rosenbrock')
+    parser.add_argument('-n',
+                        type = int,
+                        dest = 'dim_rosen',
+                        default = 25,
+                        metavar = 'INT',
+                        help = 'dimension of Rosenbrock function')
+    parser.add_argument('-r', 
+                        type = float,
+                        dest = 'param_rosen',
+                        default = 4.0,
+                        metavar = 'FLOAT',
+                        help = 'parameter for Rosenbrock function')
     parser.add_argument('--version',
                         dest = 'version',
                         action = 'store_true',
-                        help='Print version number')
+                        help = 'Print version number')
     res = parser.parse_args()
     return res
 
@@ -47,6 +63,11 @@ def target(opts):
     print (f"Diff: {y}")
     print (f"Print sum from Fortran submodule:")
     mathf2py.fsumprint(opts.val_a, opts.val_b)
+    return
+
+
+def run_lbfgsb(opts):
+    mathf2py.optimize_rosenbrock(n = opts.dim_rosen, a = opts.param_rosen)
     return
 
 
@@ -82,6 +103,8 @@ def main():
             run_unittests()
         elif opts.version:
             print ("FPyDemo version {:s}".format(project.version()))
+        elif opts.do_lbfgsb:
+            run_lbfgsb(opts)
         else:
             target(opts)
     MPI.Finalize()
