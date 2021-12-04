@@ -86,6 +86,10 @@ def numpy_get_f2py_info():
     from system_info import get_info
     return get_info('f2py', 0)
 
+def numpy_get_blas_info():
+    from system_info import get_info
+    return get_info('blas', 0)
+
 
 '''
 --------------------------
@@ -181,12 +185,14 @@ def ext_modules():
     fmodules    = []
     if len(flib_cfgs) > 0:
         f2py_info   = numpy_get_f2py_info()
-        print(f2py_info)
-        extra_libraries = []
+        blas_info   = numpy_get_blas_info()
+        print(blas_info)
+        extra_libraries = ['blas']
         extra_compile_args = []
         #
         flibs       = cfg_lib_todict(flib_cfgs, flib_dir, libprefix)
-        fmodules    = [compile_extension_dict(k, v, extra_libraries, extra_compile_args) \
+        fmodules    = [compile_extension_dict(k, v, extra_libraries, extra_compile_args, \
+                          **dict(extra_info = blas_info)) \
                           for k, v in flibs.items()]
     return cmodules + fmodules
 
@@ -260,7 +266,7 @@ def setup_package():
     #cfg_str_keys  = 'name author author_email description copyright license'.split()
     #cfg_url_keys  = 'main_url download_url git_url docs_url source_code_url bug_tracker_url'.split()
     #cfg_list_keys = 'keywords setup_requires install_requires contributiors'.split()
-    #ext1 = np_Extension(name = 'libfpydemo_fmath', sources = ['/home/saikat/Documents/work/fpydemo/src/fpydemo/flibs/fmathmod.f95', '/home/saikat/Documents/work/fpydemo/src/fpydemo/flibs/fmath.f95'])
+    #ext1 = np_Extension(name = 'libfpydemo_array_handler', sources = ['/home/saikat/Documents/work/packages/python/fpydemo/src/fpydemo/flibs/array_handler.f95'], libraries=['blas'])
 
     metadata = dict(
         name             = cfg['name'],
@@ -282,6 +288,7 @@ def setup_package():
         packages         = setuptools.find_packages(where = "src"),
         package_dir      = {"": "src"},
         entry_points     = {'console_scripts': ['fpydemo = fpydemo.main:main']},
+        #ext_modules      = [ext1],
         ext_modules      = ext_modules(),
         cmdclass         = cmdclass,
         #setup_requires   = cfg_string_tolist('setup_requires', ','),
