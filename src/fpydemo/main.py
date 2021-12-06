@@ -36,10 +36,6 @@ def parse_args():
                         dest = 'do_lbfgsb',
                         action = 'store_true',
                         help = 'Perform L-BFGS-B optimization of Rosenbrock')
-    parser.add_argument('--array-check',
-                        dest = 'do_array_check',
-                        action = 'store_true',
-                        help = 'Perform array operations with Fortran using Numpy arrays')
     parser.add_argument('-n',
                         type = int,
                         dest = 'dim_rosen',
@@ -72,11 +68,6 @@ def target(opts):
 
 def run_lbfgsb(opts):
     mathf2py.optimize_rosenbrock(n = opts.dim_rosen, a = opts.param_rosen)
-    return
-
-
-def run_arraydivision(opts):
-    mathf2py.farray_divide(4, 5, opts.val_a)
     return
 
 
@@ -114,8 +105,6 @@ def main():
             print ("FPyDemo version {:s}".format(project.version()))
         elif opts.do_lbfgsb:
             run_lbfgsb(opts)
-        elif opts.do_array_check:
-            run_arraydivision(opts)
         else:
             target(opts)
     MPI.Finalize()

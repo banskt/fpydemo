@@ -11,7 +11,7 @@ module fmath
         real, intent(out) :: s, d
         call fsum(a, b, s)
         call fdiff(a, b, d)
-        print *, 'This is from subroutine of fsumdiff module'
+!        print *, 'This is from subroutine of fsumdiff module'
     end subroutine
 
     subroutine fsumprint(a, b)

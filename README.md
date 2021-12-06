@@ -5,9 +5,9 @@ Demonstration of **packaging** a _command line tool_ written in Python and Fortr
 This minimum working example (MWE) provides implementation of the following features:
   - [x] use native Fortran codes for the shared libraries.    
   - [x] the shared libraries are compiled using F2Py.    
-  - [ ] use LAPACK routines for linear algebra in the FORTRAN code.    
+  - [x] use LAPACK routines for linear algebra in the FORTRAN code.    
   - [x] use `mpi4py` for MPI parallelization.    
-  - [ ] call a third-party Fortran library as `use third_party_library` from the main Fortran library.    
+  - [x] call a third-party Fortran library as `use third_party_library` from the main Fortran library.    
 
 <!--
 Packaging the MWE is done with `setuptools.setup()`.

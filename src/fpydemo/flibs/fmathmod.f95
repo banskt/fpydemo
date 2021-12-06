@@ -11,7 +11,7 @@ contains
         real, intent(in)  :: b
         real, intent(out) :: res
         res = a + b
-        write(*,*) "Hello from the Fortran sum subroutine!"
+!        write(*,*) "Hello from the Fortran sum subroutine!"
     end subroutine
 
     subroutine fdiff(a, b, res)
@@ -20,7 +20,7 @@ contains
         real, intent(in)  :: b
         real, intent(out) :: res
         res = a - b
-        write(*,*) "Hello from the Fortran diff subroutine!"
+!        write(*,*) "Hello from the Fortran diff subroutine!"
     end subroutine
 
 end module fmathmod

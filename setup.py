@@ -187,13 +187,15 @@ def ext_modules():
         f2py_info   = numpy_get_f2py_info()
         blas_info   = numpy_get_blas_info()
         print(blas_info)
-        extra_libraries = ['blas']
+        extra_libraries = []
         extra_compile_args = []
         #
         flibs       = cfg_lib_todict(flib_cfgs, flib_dir, libprefix)
-        fmodules    = [compile_extension_dict(k, v, extra_libraries, extra_compile_args, \
-                          **dict(extra_info = blas_info)) \
-                          for k, v in flibs.items()]
+        #fmodules    = [compile_extension_dict(k, v, extra_libraries, extra_compile_args, \
+        #                  **dict(extra_info = blas_info)) \
+        #                  for k, v in flibs.items()]
+        fmodules    = [compile_extension_dict(k, v, extra_libraries, extra_compile_args)  \
+                           for k, v in flibs.items()]
     return cmodules + fmodules
 
 
