@@ -186,7 +186,10 @@ def ext_modules():
     if len(flib_cfgs) > 0:
         f2py_info   = numpy_get_f2py_info()
         blas_info   = numpy_get_blas_info()
+        lapack_info = numpy_get_lapack_info()
         print(blas_info)
+        print(lapack_info)
+        print(f2py_info)
         extra_libraries = []
         extra_compile_args = []
         #
